@@ -1,0 +1,170 @@
+body {
+    background-color: #F5E8DD;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+    background:
+        linear-gradient(#e5cedc86, #bca3acb1),
+        url(https://cdn.lifehack.org/wp-content/uploads/2016/03/05114255/abc-healthyfood.jpg);
+    color: white;
+    border-radius: 0 !important;
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.navbar-custom {
+    background-color: #B5C0D0;
+    border-radius: 0 !important;
+    margin-left: 0px;
+    margin-right: 0px;
+    box-shadow: 0px 5px 20px #a1ab9e;
+}
+
+.nav-link {
+    color: white;
+}
+
+.recipeCardStyle {
+    color: black;
+}
+
+img.cardImage {
+    width: 300px;
+    height: 337px;
+    object-fit: cover;
+    box-shadow: 0px 0px 10px #00000051;
+}
+
+img.displayImage {
+    height: 500px;
+    width: auto;
+    object-fit: cover;
+}
+
+.btn-group {
+    box-shadow: 0px 0px 10px #00000051;
+}
+
+.recipeDetails {
+    padding: 15px;
+}
+
+footer {
+    background-color: #B5C0D0;
+    padding: 15px;
+    margin-top: 15px;
+    color: white;
+    box-shadow: 0px 5px 20px #a1ab9e;
+}
+
+.form-style {
+    padding: 30px;
+    margin: 15px;
+    background-color: #EED3D9;
+    box-shadow: 0px 0px 20px #a1ab9e;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.vertical-center {
+    top: 50%;
+}
+
+.error {
+    color: red;
+}
+
+.success {
+    color: green;
+}
+
+.recipeCard {
+    background-color: #EED3D9;
+    box-shadow: 0px 0px 20px #a1ab9e;
+    padding: 15px;
+}
+
+.row.display-flex {
+    display: flex;
+    flex-wrap: wrap;
+    height: 200px;
+
+}
+
+.flex-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.bigRecipe {
+    background-color: #CCD3CA;
+    padding: 30px;
+    margin-bottom: 15px;
+    margin-top: 15px;
+    box-shadow: 0px 0px 20px #00000051;
+}
+
+.ingredientDiv {
+    background-color: #EED3D9;
+    padding: 15px;
+    margin: 15px;
+    box-shadow: 0px 0px 10px #00000051 inset;
+}
+
+.instructionDiv {
+    background-color: #EED3D9;
+    padding: 15px;
+    margin: 15px;
+    box-shadow: 0px 0px 10px #00000051 inset;
+}
+
+select.input-xs {
+    height: 20px;
+    line-height: 20px;
+}
+
+.btn-primary {
+    background-color: #93B5C6 !important;
+    border-color: #93B5C6;
+}
+
+.btn-light.menuButton, .btn-dark.menuButton, .btn-primary.menuButton {
+    box-shadow: 0px 0px 10px #00000051;
+}
+
+
+
+.btn-danger.radioBtn {
+    background-color: #93B5C6 !important;
+    border-color: #93B5C6;
+    color: black;
+}
+
+.btn-warning.radioBtn {
+    background-color: #DDEDAA !important;
+    border-color: #DDEDAA;
+    color: black;
+}
+
+.btn-success.radioBtn {
+    background-color: #F0CF65 !important;
+    border-color: #F0CF65;
+    color: black;
+}
+
+.btn-info.radioBtn {
+    background-color: #D7816A !important;
+    border-color: #D7816A;
+    color: black;
+}
+
+.btn-primary.radioBtn {
+    background-color: #BD4F6C !important;
+    border-color: #BD4F6C;
+    color: black;
+}
+

@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add a Recipe</title>
+    <!--
+        Abigail Boggs
+        amboggs@dmacc.edu
+    -->
+
+    <!-- Boot Strap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="stylesheet.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="stylesheet.css">
+<!-- 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
+
+    <!-- Functions for adding the recipes to local storage -->
+    <script src="js/addingRecipes.js"></script>
+    <!-- Functions for validating the input -->
+    <script src="js/validateInput.js"></script>
+    <!-- Functions for creating another ingredient -->
+    <script src="js/newIngredient.js"></script>
+    <!-- Functions for creating another instruction -->
+    <script src="js/newInstruction.js"></script>
+    <!-- food names and file names -->
+    <script src="js/foods.js"></script>
+    <!-- Reset functions (resetting errors and form fields)-->
+    <script src="js/resetFunctions.js"></script>
+
+    <script>
+        // localStorage.clear();
+        function showImage() {
+            document.querySelector("#image-preview").src = document.querySelector('#foodImage').value;
+        }
+
+        function pageSetup() {
+
+        }
+        function testInput() {
+            resetErrors();
+
+            validInput = validateInput(instructionCount, ingredientCount);
+            if (validInput == true) {
+                document.querySelector("#recipeSuccess").innerHTML = "Recipe saved!"
+                addRecipe(ingredientCount, instructionCount);
+                resetForm();
+            }
+
+        }
+
+
+    </script>
+</head>
+
+<body onload="pageSetup()">
+    <header class="container-fluid" style="padding: 0px;">
+        <!-- Title jumbotron -->
+        <div class="p-5 jumbotron text-center">
+            <h1>Abby's Fry Shack</h1>
+            <h2>Recipe Book</h2>
+        </div>
+
+        <!-- Nav Bar -->
+        <nav class="sticky-top navbar-custom navbar navbar-expand-sm">
+            <ul class="navbar-nav" style="margin-left:15px;">
+                <li class="nav-item active">
+                    <a class="nav-link" href="index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="addRecipe.html">Add Recipe</a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container center form-style">
+        <div>
+            <!-- Form to input here -->
+            <h4>New Recipe:</h4>
+            <hr>
+            <form action="#">
+                <div class="form-group" style="padding:15px">
+                    <label for="recipeName"><h4>Recipe Name:</h4> </label>
+                    <input type="recipeName" class="form-control" id="recipeName">
+
+                    <span id="nameError" class="error"></span>
+                </div>
+
+                <div class="form-group" style="padding:15px">
+                    <!-- Image import-->
+                    <label for="foodImage"><h4>Upload your image (select image):</h4> </label>
+                    <select id="foodImage" onchange="showImage()" class="form-select">
+                        <option value="images/select.jpg">Select an Image</option>
+                        <script>
+                            for (let x = 0; x < foodNames.length; x++) {
+                                document.write("<option value='" + imageFileNames[x] + "'>" + foodNames[x] + "</option>")
+                            }
+                        </script>
+                    </select>
+                    <span id="imageError" class="error"> </span>
+                </div>
+
+                <div class="form-group" style="padding:15px">
+                    <!-- uploaded image appears here -->
+                    <img src="images/select.JPG" id="image-preview" class="img-thumbnail" width="350px" />
+
+                </div>
+
+                <div class="form-check" style="padding: 15px;" >
+                    <!-- difficulty input -->
+                    <label for="easy"><h4>Enter Difficulty:</h4> </label>
+                    <div style="margin-left:25px;">
+                        <input type="radio" id="easy" value="Easy" name="difficulty" class="form-check-input">
+                        <label for="easy" class="form-check-label">Easy</label><br>
+                        <input type="radio" id="medium" value="Medium" name="difficulty" class="form-check-input">
+                        <label for="medium" class="form-check-label">Medium</label><br>
+                        <input type="radio" id="hard" value="Hard" name="difficulty" class="form-check-input">
+                        <label for="hard" class="form-check-label">Hard</label><br>
+                        <input type="radio" id="superHard" value="Super Hard" name="difficulty" class="form-check-input">
+                        <label for="superHard" class="form-check-label">Super Hard</label>
+                    </div>
+                    <span id="difficultyError" class="error"></span>
+                </div>
+
+                <div class="form-group" style="padding:15px">
+                    <!-- quantity/serving size -->
+                    <label for="servingSize"><h4>Servings:</h4> </label>
+                    <input type="number" id="servingSize" name="servingSize" min="1" step="1" required>
+                    <span id="servingSizeError" class="error"></span>
+                </div>
+
+                <div class="form-group" style="padding:15px">
+                    <h4>Time Taken:</h4>
+                    <!-- prep time -->
+                    <label for="prepTimeHours">Prep Time:</label>
+                    <input type="number" id="prepTimeHours" name="prepTimeHours" step="1" min="0" max="60" required>
+                    hours
+                    <input type="number" id="prepTimeMins" name="prepTimeMins" step="1" min="0" max="60" required>
+                    minutes
+                    <br>
+                    <span id="prepTimeError" class="error"></span>
+                    <!-- cook time -->
+                    <br>
+                    <label for="cookTimeHours">Cook Time:</label>
+                    <input type="number" id="cookTimeHours" name="cookTimeHours" step="1" min="0" max="60" required>
+                    hours
+                    <input type="number" id="cookTimeMins" name="cookTimeMins" step="1" min="0" max="60" required>
+                    minutes
+                    <br>
+                    <span id="cookTimeError" class="error"></span>
+                </div>
+
+                <div class="form-group" style="padding:15px">
+                    <!-- Ingredients input -->
+                    <h4>Ingredients:</h4>
+
+                    <strong><label id="ingredientLabel1">Ingredient 1:</label></strong><br>
+                    <label for="quantity1" id="quantityLabel">Quantity: </label>
+                    <input type="number" placeholder="2" step="0.25" min="0" max="100" id="quantity1" required>
+                    <span id="quantityError1" class="error"></span>
+                    <br>
+
+                    <label for="measurement1" id="measurementLabel">Unit Measurement: </label>
+                    <select id="measurement1" style="margin:15px;">
+                        <option value="">Select a Measurement</option>
+                        <option value="teaspoon">Teaspoons</option>
+                        <option value="tablespoon">Tablespoons</option>
+                        <option value="cup">Cups</option>
+                        <option value="gram">Grams</option>
+                        <option value="ounce">Ounces</option>
+                        <option value="pound">Pounds</option>
+                        <option value="Fluid Ounce">Fluid Ounces</option>
+                        <option value="Liter">Liters</option>
+                        <option value="Milliliter">Mililiters</option>
+                        <option value="Can">Cans</option>
+                        <option value="Pinch">Pinch</option>
+                        <option value="Dash">Dash</option>
+                        <option value="noMeasurement"> </option>
+                    </select>
+                    <span id="measurementError1" class="error"></span>
+                    <br>
+
+                    <label for="ingredientName1" id="ingredientNameLabel">Ingredient Name:</label>
+                    <input type="text" placeholder=" water" id="ingredientName1">
+                    <span id="ingredientNameError1" class="error"></span>
+                    <br>
+
+                    <div id="moreIngredients">
+                        <template id="ingredients">
+                            <strong><label id="ingredientLabel">Ingredient 1:</label></strong><br>
+                            <label for="quantity" id="quantityLabel">Quantity: </label>
+                            <input type="number" placeholder="2" step="0.25" id="quantity" min="0" max="100">
+                            <span id="quantityError" class="error"></span>
+                            <br>
+
+                            <label for="measurement" id="measurementLabel">Unit Measurement: </label>
+                            <select id="measurement" style="margin:15px;">
+                                <option value="">Select a Measurement</option>
+                                <option value="teaspoon">Teaspoons</option>
+                                <option value="tablespoon">Tablespoons</option>
+                                <option value="cup">Cups</option>
+                                <option value="gram">Grams</option>
+                                <option value="ounce">Ounces</option>
+                                <option value="pound">Pounds</option>
+                                <option value="Fluid Ounce">Fluid Ounces</option>
+                                <option value="Liter">Liters</option>
+                                <option value="Milliliter">Mililiters</option>
+                                <option value="Can">Cans</option>
+                                <option value="Pinch">Pinch</option>
+                                <option value="Dash">Dash</option>
+                                <option value="noMeasurement"> </option>
+                            </select>
+                            <span id="measurementError" class="error"></span>
+                            <br>
+
+                            <label for="ingredientName" id="ingredientNameLabel">Ingredient Name:</label>
+                            <input type="text" placeholder=" water" id="ingredientName">
+                            <span id="ingredientNameError" class="error"></span>
+                            <br>
+                        </template>
+                    </div>
+
+                    <button type="button" class="btn btn-light menuButton" style="margin-top: 15px;" onclick="createAnotherIngredient()">Input Another
+                        Ingredient</button>
+                </div>
+
+                <div class="form-group" style="padding: 15px;">
+                    <h4>Instructions:</h4>
+
+                    <label for="stepID1" id="stepLabel">Step 1:</label>
+                    <input type="text" id="stepID1" size="50"
+                        placeholder="add flour, baking soda, and salt to large mixing bowl">
+                    <span id="instructionError1" class="error"></span>
+                    <br>
+
+                    <div id="moreSteps">
+                        <!-- instructions, allows entry of multiple steps in instructions-->
+                        <template id="instructions">
+                            <label for="stepID" id="stepLabel">Step 1:</label>
+                            <input type="text" id="stepID" name="stepID" size="50"
+                                placeholder="add flour, baking soda, and salt to large mixing bowl">
+                            <span id="instructionError" class="error"></span>
+                            <br>
+                        </template>
+                    </div>
+
+                    <button type="button" class="btn btn-light menuButton" style="margin-top:15px" onclick="createAnotherInstruction()">Input Another
+                        Step</button>
+                </div>
+
+                <hr>
+
+                <button type="submit" class="btn btn-light menuButton" style="margin:15px" onclick="testInput()">Submit</button>
+                <button type="reset" class="btn btn-dark menuButton" style="margin:15px" onclick="resetErrors()">Reset</button>
+                <span id="recipeSuccess" class="success"></span>
+            </form>
+        </div>
+    </div>
+    <footer class="container-fluid text-center">
+        <h4>Advanced JavaScript - Spring 2024</h4>
+        <h5>Recipe Portfolio Project</h5>
+        <h5>amboggs@dmacc.edu</h5>
+        <h5><a href="http://abbysfryshack.com/">abbysfryshack.com</a></h5>
+    </footer>
+
+</body>
+
+</html>
